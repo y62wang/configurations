@@ -2,7 +2,6 @@ source common_aliases.sh
 
 autoload -U colors
 colors
-
 setopt AUTO_PUSHD
 setopt PUSHD_MINUS
 setopt CDABLE_VARS
@@ -27,6 +26,11 @@ fi
 
 
 # ********************************************* COMMON FUNCTIONS *********************************************
+
+# open all files in a single sublime text window
+function sub() {
+    subl -a $1
+}
 
 function reload() {
     source "$YANG_CFG_DIR/configurations.sh";
