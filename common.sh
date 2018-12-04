@@ -32,8 +32,9 @@ function sub() {
     subl -a $1
 }
 
-function reload() {
-    source "$YANG_CFG_DIR/configurations.sh";
+# reloads the scripts
+function rl() {
+    source "$YANG_CFG_DIR/configurations.sh" && echo "Script '$YANG_CFG_DIR/configurations.sh' is reloaded".;
 }
 
 # go up directory N times
@@ -64,8 +65,10 @@ function install-tools-mac() {
     brew install tig;
     brew install dark-mode ack midnight-commander htop wget geoip watch awscli calc jq lftp links lynx ncdu nmap tmux tree unrar vimpager;
     brew install cask;
+    brew cask install firefox;
     brew cask install kdiff3;
     brew cask install diffmerge;
+    brew cask install visualvm;
 }
 
 function initialize-git-defaults() {
