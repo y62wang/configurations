@@ -1,4 +1,5 @@
 # aliases
 
 alias gb='gradle'
-alias gt='gradle test'
+alias gt='gradle test -i'
+alias gtc='gradle test --continuous'
