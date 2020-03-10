@@ -11,7 +11,7 @@ function company-question() {
 function leetcode () {
 	if [ "$#" -ne 2 ]; then
 		echo "command format: question-filter [tag] [company]"
-		exit 1
+        return
 	fi
 	
 	join <(tag-question $1) <(company-question $2) | qdata

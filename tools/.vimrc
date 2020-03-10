@@ -1,55 +1,3 @@
-" ######################################## GLOBAL SETTINGS########################################
-
-set directory=$HOME/.vim/swapfiles/
-set rtp+=/usr/local/opt/fzf
-set guifont=Roboto\ Mono\ for\ Powerline:h14
-set t_Co=256
-set encoding=utf-8
-
-" ######################################## COSMETIC SETTINGS #####################################
-
-colo one-dark
-syntax on
-filetype plugin indent on
-set hidden
-set number
-set relativenumber
-
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
-
-" ######################################## EDITING SETTINGS ######################################
-
-set tabstop=4       " number of visual spaces per TAB
-set softtabstop=4   " number of spaces in tab when editing
-set shiftwidth=4
-set expandtab       " tabs are spaces
-set showcmd
-set cursorline          " highlight current line
-filetype indent on      " load filetype-specific indent files
-set wildmenu            " visual autocomplete for command menu
-set lazyredraw          " redraw only when we need to.
-set showmatch           " highlight matching [{()}]
-set incsearch           " search as characters are entered
-set hlsearch            " highlight matches
-
-" ######################################## KEY MAPPINGS ######################################
-
-inoremap jk <ESC>
-let mapleader = " "
-
-nnoremap <C-space> : CtrlPTag<CR>
-
- map ; :Files<CR>
-
-" ######################################## Ctril P ###########################################
-
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " ################################################################################
 " VUNDLE SETTINGS 
@@ -139,3 +87,56 @@ filetype plugin indent on    " required
 " set guicursor+=a:blinkwait50
 " set guicursor+=a:blinkon175
 
+" ######################################## GLOBAL SETTINGS########################################
+
+set directory=$HOME/.vim/swapfiles/
+set rtp+=/usr/local/opt/fzf
+set guifont=Roboto\ Mono\ for\ Powerline:h14
+set t_Co=256
+set encoding=utf-8
+
+" ######################################## COSMETIC SETTINGS #####################################
+
+colo evening
+
+syntax on
+filetype plugin indent on
+set hidden
+set number
+set relativenumber
+
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+
+" ######################################## EDITING SETTINGS ######################################
+
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set shiftwidth=4
+set expandtab       " tabs are spaces
+set showcmd
+set cursorline          " highlight current line
+filetype indent on      " load filetype-specific indent files
+set wildmenu            " visual autocomplete for command menu
+set lazyredraw          " redraw only when we need to.
+set showmatch           " highlight matching [{()}]
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
+
+" ######################################## KEY MAPPINGS ######################################
+
+inoremap jk <ESC>
+let mapleader = " "
+
+nnoremap <C-space> : CtrlPTag<CR>
+
+ map ; :Files<CR>
+
+" ######################################## Ctril P ###########################################
+
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
