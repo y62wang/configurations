@@ -7,6 +7,7 @@ export PATH="$PATH:$YANG_CFG_DIR"
 source zsh-config.sh
 source common.sh
 source gradle.sh
+source tools.sh
 source chess.sh
 
 # configuration customized for different 

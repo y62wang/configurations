@@ -37,6 +37,34 @@ function rl() {
     source "$YANG_CFG_DIR/configurations.sh" && echo "Script '$YANG_CFG_DIR/configurations.sh' is reloaded".;
 }
 
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+function vo() (
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vi} "${files[@]}"
+)
+
+# Modified version where you can press
+#   - CTRL-O to open with `open` command,
+#   - CTRL-E or Enter key to open with the $EDITOR
+function fo() (
+  IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vi} "$file"
+  fi
+)
+
+# fd - cd to selected directory
+function fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
 # go up directory N times
 function up() {
     times=1
@@ -52,6 +80,30 @@ function up() {
     return;
 }
 
+# cdf - cd into the directory of the selected file
+cdf() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
+
+function def() {
+    function_name=$1
+    declare -f $function_name;
+}
+
+# fkill - kill process
+fkill() {
+  local pid
+  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+  fi
+}
+
 function install-tools-mac() {
     brew update;
     brew install python;
@@ -63,6 +115,9 @@ function install-tools-mac() {
     brew install maven;
     brew install colordiff;
     brew install tig;
+    brew install jq jp fx;
+    brew install bitwise;
+    brew install bat bmon htop nmap;
     brew install dark-mode ack midnight-commander htop wget geoip watch awscli calc jq lftp links lynx ncdu nmap tmux tree unrar vimpager;
     brew install cask;
     brew cask install firefox;
@@ -86,3 +141,12 @@ function initialize-git-defaults() {
     git config --global color.diff.new        "green bold"
     git config --global color.diff.whitespace "red reverse"
 }
+
+function cheatsheet() {
+    echo '########################################################################################################';
+    echo '# 1.  Download Configurations:                 git clone https://github.com/y62wang/configurations.git #';
+    echo '# 2.  Install && Source:                                                       add script here         #';
+    echo '# 2.  Install && Source ON HOST:                                               add script here         #';
+    echo '########################################################################################################';
+}
+
