@@ -177,11 +177,6 @@ alias g2s2="/apollo/env/G2S2CommandTools/bin/g2s2 -u http://g2s2-author.amazon.c
 #alias g2s2="/apollo/env/G2S2CommandTools/bin/g2s2 -u http://g2s2-repo-author-na.amazon.com/"
 
 ######################################## NO-RUSH ########################################
-alias list-g2s2-rules='g2s2rd get dp_first_order_logic_rules stage_version=@FirstOrderLogicRuleEngineDevo | ionpp'
-alias list-g2s2-promotions='g2s2rd get dp_shipping_incentives stage_version="@DP_Shipping_Incentives_Devo"| ionpp'
-
-alias list-g2s2-rules-prod='g2s2rd get dp_first_order_logic_rules stage_version=@FirstOrderLogicRuleEngineProd | ionpp'
-alias list-g2s2-promotions-prod='g2s2rd get dp_shipping_incentives stage_version="@DP_Shipping_Incentives_Prod"| ionpp'
 
 alias envs='ls /apollo/env | xargs -n 1 echo setenv'
 alias lsenv='/bin/ps axwww | grep -o -P "/apollo/env/[a-zA-Z0-9\\-]+" | sort | uniq | cut -d "/" -f4- | xargs -n 1 echo setenv '
