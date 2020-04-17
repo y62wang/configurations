@@ -44,6 +44,7 @@ function rl!() {
 
 function source-tmp() {
     cd /tmp \
+    && rm -rf /tmp/configurations \
     && git clone https://github.com/y62wang/configurations \
     && cd configurations \
     && export YANG_CFG_DIR=/tmp/configurations \
