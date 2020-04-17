@@ -32,9 +32,12 @@ function rl() {
     source "$YANG_CFG_DIR/configurations.sh" && echo "Script '$YANG_CFG_DIR/configurations.sh' is reloaded".;
 }
 
-function rl-sync() {
+# reload and sync functionality
+function rl!() {
     cd $YANG_CFG_DIR
-    put pull --rebase
+    git stash
+    git pull --rebase
+    git stash apply
     rl
     cd -
 }
