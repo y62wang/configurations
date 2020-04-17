@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-export YANG_CFG_DIR='/Users/yanwany/workplace/configurations'
 export PATH="$PATH:$YANG_CFG_DIR"
 
 source "$YANG_CFG_DIR/zsh-config.sh"
