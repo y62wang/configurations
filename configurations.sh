@@ -15,7 +15,12 @@ source chess.sh
 
 ### COMMON CONFIGURATIONS
 EDITOR=vi
+VISUAL=vim
+
+
+# enable vi mode for command line input
+set -o vi
+bindkey -v
+
 export GREP_OPTIONS='--color=always'
-
-
 source overrides.sh
