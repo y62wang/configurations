@@ -25,6 +25,20 @@ if [[ $TERM == "xterm-256color" ]]; then
 fi
 
 
+# ********************************************* CONFIG RELATED ***********************************************
+
+# reloads the configurations 
+function rl() {
+    source "$YANG_CFG_DIR/configurations.sh" && echo "Script '$YANG_CFG_DIR/configurations.sh' is reloaded".;
+}
+
+function rl-sync() {
+    cd $YANG_CFG_DIR
+    put pull --rebase
+    rl
+    cd -
+}
+
 # ********************************************* COMMON FUNCTIONS *********************************************
 
 # open all files in a single sublime text window
@@ -32,11 +46,10 @@ function sub() {
     subl -a $1
 }
 
-# reloads the scripts
-function rl() {
-    source "$YANG_CFG_DIR/configurations.sh" && echo "Script '$YANG_CFG_DIR/configurations.sh' is reloaded".;
-}
 
+function vf() {
+    e $(fzf)
+}
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
@@ -81,7 +94,7 @@ function up() {
 }
 
 # cdf - cd into the directory of the selected file
-cdf() {
+function cdf() {
    local file
    local dir
    file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
@@ -94,7 +107,7 @@ function def() {
 }
 
 # fkill - kill process
-fkill() {
+function fkill() {
   local pid
   pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
 
@@ -104,12 +117,17 @@ fkill() {
   fi
 }
 
+function grep-kill() {
+    ps aux | grep "$1" | awk '{print $2}' | xargs kill -9
+}
+
 function install-tools-mac() {
     brew update;
     brew install python;
     brew install git;
     brew install macvim;
     brew install ag;
+    brew install pick;
     brew install tree;
     brew install gradle;
     brew install maven;

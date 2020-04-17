@@ -59,7 +59,6 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'junegunn/fzf.vim'
 Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'wikitopian/hardmode.git'
-Plugin 'kana/vim-textobj-entire'
 
 
 " All of your Plugins must be added before the following line
