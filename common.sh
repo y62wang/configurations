@@ -42,7 +42,7 @@ function rl!() {
     cd -
 }
 
-function source-tmp() {
+function upload-temp-configs() {
     cd /tmp \
     && rm -rf /tmp/configurations \
     && git clone https://github.com/y62wang/configurations \
@@ -52,13 +52,15 @@ function source-tmp() {
     && source zsh-config.sh
 }
 
-function remote-source-function() {
-  ssh $1 "$(typeset -f $2); $2";
+function remote-exec-function() {
+  ssh -t $1 "$(typeset -f $2); $2";
 }
 
-function remote-source-configs() {
-  remote-source-function $1 "source-tmp";
+function upload-configs() {
+  ssh -t $1 "sudo yum install git" && \
+  remote-exec-function $1 "upload-temp-configs";
 }
+
 
 # ********************************************* COMMON FUNCTIONS *********************************************
 
