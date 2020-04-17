@@ -42,7 +42,6 @@ function rl!() {
     cd -
 }
 
-
 # ********************************************* COMMON FUNCTIONS *********************************************
 
 # open all files in a single sublime text window
@@ -123,6 +122,11 @@ function fkill() {
 
 function grep-kill() {
     ps aux | grep "$1" | awk '{print $2}' | xargs kill -9
+}
+
+function pyserver() {
+    echo "http://$HOST:8000/build/"
+    python -m http.server 8000 | python -m SimpleHTTPServer 8000
 }
 
 function install-tools-mac() {

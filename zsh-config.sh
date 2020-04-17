@@ -381,9 +381,12 @@ function repo() {
     git clone ssh://git.amazon.com/pkg/$1
 }
 
-function pyserver() {
-    echo "http://$HOST:8000/build/"
-    python -m http.server 8000 | python -m SimpleHTTPServer 8000
+
+function source-tmp() {
+    cd /tmp \
+    && git clone https://github.com/y62wang/configurations \
+    && cd configurations \
+    && export YANG_CFG_DIR=/tmp/configurations \
+    && source configurations.sh \
+    && source zsh-config.sh
 }
-
-
