@@ -42,11 +42,28 @@ function rl!() {
     cd -
 }
 
+function source-tmp() {
+    cd /tmp \
+    && git clone https://github.com/y62wang/configurations \
+    && cd configurations \
+    && export YANG_CFG_DIR=/tmp/configurations \
+    && source configurations.sh \
+    && source zsh-config.sh
+}
+
+function remote-source-function() {
+  ssh $1 "$(typeset -f $2); $2";
+}
+
+function remote-source-configs() {
+  remote-source-function $1 "source-tmp";
+}
+
 # ********************************************* COMMON FUNCTIONS *********************************************
 
 # open all files in a single sublime text window
 function sub() {
-    subl -a $1
+    sublime -a $@
 }
 
 

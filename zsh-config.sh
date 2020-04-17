@@ -380,13 +380,3 @@ function repo() {
     wd repo
     git clone ssh://git.amazon.com/pkg/$1
 }
-
-
-function source-tmp() {
-    cd /tmp \
-    && git clone https://github.com/y62wang/configurations \
-    && cd configurations \
-    && export YANG_CFG_DIR=/tmp/configurations \
-    && source configurations.sh \
-    && source zsh-config.sh
-}

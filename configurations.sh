@@ -1,5 +1,10 @@
 #!/bin/zsh
 
+if [ -z "$YANG_CFG_DIR" ]; then
+    export YANG_CFG_DIR="/tmp/configurations"
+    echo "default configuration directory not found, using $YANG_CFG_DIR";
+fi
+
 export PATH="$PATH:$YANG_CFG_DIR"
 
 source "$YANG_CFG_DIR/zsh-config.sh"
