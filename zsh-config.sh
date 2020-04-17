@@ -22,12 +22,12 @@ HISTFILE=~/.history
 
 ################################### CONFIGURATIONS ###################################
 export PATH="/apollo/env/SDETools/bin:$PATH"
-export PATH="$YANG_CFG_DIR:$PATH"
 export BRAZIL_PLATFORM_OVERRIDE="RHEL5_64"
 
 ################################### ALIASES ###################################
 
 # Remote Machines
+alias ki="kinit -f"
 alias ssh1="ssh -o ProxyCommand=None $1"
 
 VM2="dev-dsk-yanwany-2a3-i-fbe3f90d.us-west-2.amazon.com"
@@ -39,7 +39,6 @@ alias vm3="ssh $VM3"
 alias last-commit="git log --stat --max-count=1 --decorate --graph"
 alias script="sub ~/workplace/scripts/zsh-config.sh"
 
-alias ki="kinit -f"
 
 function w() {
   open "http://w?`echo $@`" &;
