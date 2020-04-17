@@ -42,6 +42,7 @@ function rl!() {
     cd -
 }
 
+
 # ********************************************* COMMON FUNCTIONS *********************************************
 
 # open all files in a single sublime text window
