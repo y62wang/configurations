@@ -68,9 +68,16 @@ alias dryrun="brazil ws dryrun"
 
 alias syncmd="brazil ws --sync --md"
 alias sync="brazil ws sync"
-alias checkout="brazil ws --use --package $1"
 alias create-ws="brazil ws --create --name $1"
 alias vs="brazil ws --use --versionset $1"
+
+alias checkout-no-rush-pkgs="checkout NoRushCommon NoRushEligibility NoRushPromotionApplication NoRushIncentiveConfigurationModel"
+
+function checkout() {
+    for pkg in $@; do
+        brazil ws --use --package $pkg
+    done
+}
 
 function clean-build-ws() {
     brazil ws clean
