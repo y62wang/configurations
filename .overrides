@@ -1,0 +1,9 @@
+# configuration customized for different 
+
+# source zsh-config.sh 
+# source .os161
+
+
+function ib() {
+    python ~/workplace/alpha_stock/tools/ib.py $1 $2
+}

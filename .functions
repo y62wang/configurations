@@ -1,20 +1,3 @@
-source common_aliases.sh
-
-autoload -U colors
-colors
-setopt AUTO_PUSHD
-setopt PUSHD_MINUS
-setopt CDABLE_VARS
-
-setopt EXTENDED_HISTORY        # store time in history
-setopt HIST_EXPIRE_DUPS_FIRST  # unique events are more usefull to me
-setopt HIST_VERIFY             # Make those history commands nice
-setopt INC_APPEND_HISTORY      # immediatly insert history into history file
-HISTSIZE=160000                # spots for duplicates/uniques
-SAVEHIST=150000                # unique events guaranteed
-HISTFILE=~/.history
-
-
 # ********************************************* KEY BINDING *********************************************
 
 if [[ $TERM == "xterm-256color" ]]; then
@@ -24,17 +7,20 @@ if [[ $TERM == "xterm-256color" ]]; then
   bindkey "^[[3~" delete-char
 fi
 
-
 # ********************************************* CONFIG RELATED ***********************************************
 
 # reloads the configurations 
 function rl() {
-    source "$YANG_CFG_DIR/configurations.sh" && echo "Script '$YANG_CFG_DIR/configurations.sh' is reloaded".;
+    source $DOT_FILE_DIR/.configurations && echo "Script $HOME/.configurations is reloaded".;
+}
+
+function dotfiles() {
+    cd $DOT_FILE_DIR
 }
 
 # reload and sync functionality
 function rl!() {
-    cd $YANG_CFG_DIR
+    cd $DOT_FILE DIR
     git stash
     git pull --rebase
     git stash apply
@@ -47,9 +33,11 @@ function upload-temp-configs() {
     && rm -rf /tmp/configurations \
     && git clone https://github.com/y62wang/configurations \
     && cd configurations \
-    && export YANG_CFG_DIR=/tmp/configurations \
-    && source configurations.sh \
-    && source zsh-config.sh
+    && ./setup.sh
+}
+
+function update_dotfiles_dir() {
+    echo "export DOT_FILE_DIR=`pwd`" > .exports_dotfiles_dir
 }
 
 function remote-exec-function() {
@@ -66,17 +54,17 @@ function upload-configs() {
 
 # open all files in a single sublime text window
 function sub() {
-    sublime -a $@
+    subl -a $@
 }
-
 
 function vf() {
     e $(fzf)
 }
+
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
-function vo() (
+function o() (
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-vi} "${files[@]}"
 )
@@ -123,7 +111,7 @@ function cdf() {
    file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
 }
 
-
+# show definition/implemetation of a function
 function def() {
     function_name=$1
     declare -f $function_name;
@@ -149,29 +137,6 @@ function pyserver() {
     python -m http.server 8000 | python -m SimpleHTTPServer 8000
 }
 
-function install-tools-mac() {
-    brew update;
-    brew install python;
-    brew install git;
-    brew install macvim;
-    brew install ag;
-    brew install pick;
-    brew install tree;
-    brew install gradle;
-    brew install maven;
-    brew install colordiff;
-    brew install tig;
-    brew install jq jp fx;
-    brew install bitwise;
-    brew install bat bmon htop nmap;
-    brew install dark-mode ack midnight-commander htop wget geoip watch awscli calc jq lftp links lynx ncdu nmap tmux tree unrar vimpager;
-    brew install cask;
-    brew cask install firefox;
-    brew cask install kdiff3;
-    brew cask install diffmerge;
-    brew cask install visualvm;
-}
-
 function initialize-git-defaults() {
     git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
     git config --global color.ui true
@@ -191,8 +156,21 @@ function initialize-git-defaults() {
 function cheatsheet() {
     echo '########################################################################################################';
     echo '# 1.  Download Configurations:                 git clone https://github.com/y62wang/configurations.git #';
-    echo '# 2.  Install && Source:                                                       add script here         #';
-    echo '# 2.  Install && Source ON HOST:                                               add script here         #';
+    echo '# 2.  Install && Source :                                                      upload-configs $host    #';
     echo '########################################################################################################';
+}
+
+# Determine size of a file or total size of a directory
+function fs() {
+    if du -b /dev/null > /dev/null 2>&1; then
+        local arg=-sbh;
+    else
+        local arg=-sh;
+    fi
+    if [[ -n "$@" ]]; then
+        du $arg -- "$@";
+    else
+        du $arg .[^.]* ./*;
+    fi;
 }
 

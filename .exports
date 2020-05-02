@@ -1,0 +1,2 @@
+export PATH="/usr/local/anaconda3/bin:$PATH"
+export PATH="$DOT_FILE_DIR:$PATH"

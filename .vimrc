@@ -91,8 +91,9 @@ filetype plugin indent on    " required
 
 set directory=$HOME/.vim/swapfiles/
 set rtp+=/usr/local/opt/fzf
-set guifont=Roboto\ Mono\ for\ Powerline:h14
-"set guifont=Menlo:h14
+"set guifont=Roboto\ Mono\ for\ Powerline:h14
+set guifont=Menlo:h14
+set guifont=Consolas:h14
 "set guifont=Courier:h14
 "set guifont=Fira\ Mono\ for\ Powerline:h14
 
@@ -102,6 +103,7 @@ set encoding=utf-8
 " ######################################## COSMETIC SETTINGS #####################################
 
 colo evening
+colo gruvbox
 
 syntax on
 filetype plugin indent on
@@ -128,6 +130,7 @@ set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching [{()}]
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
+set autoread            " auto load changed files
 
 " ######################################## KEY MAPPINGS ######################################
 
@@ -139,11 +142,12 @@ nnoremap <C-space> : CtrlPTag<CR>
 map ; :Files<CR>
 map , :Buffers<CR>
 
+nnoremap <leader>e :History<cr>
+
 nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>z :call VimuxRunCommand("bb")<cr>
-nnoremap <leader>x :call VimuxRunCommand("b && k 'rwt1;q'")<cr>
-nnoremap <leader>r :call VimuxRunCommand("k 'rwt1;q'")<cr>
-nnoremap <leader>r :call VimuxRunCommand("kt asst2")<cr>
+nnoremap <leader>x :call VimuxRunCommand("b && k 'p /bin/cat /bin/true;q'")<cr>
+nnoremap <leader>t :call VimuxRunCommand("kt asst2")<cr>
 nnoremap <leader>f ysawf
 nnoremap <leader>q ysaw"
 

@@ -1,0 +1,41 @@
+### General
+
+# Intuitive map function
+# For example, to list all directories that contain a certain file:
+# find . -name .gitattributes | map dirname
+alias map="xargs -n1"
+
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
+
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en0"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias ports="sudo lsof -PiTCP -sTCP:LISTEN"
+
+# Show active network interfaces
+alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
+
+# Always enable colored `grep` output
+# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+### GIT ALIASES
+alias galias='alias | grep git'
+alias amend='git commit --amend'
+alias gdc='git diff --cached'
+alias geffort='git log --pretty=format: --name-only | sort | uniq -c | sort -rg'
+alias glarge='git ls-tree -l -r --full-name --abbrev HEAD | sort -n -k 4 -r'
+
+# GRADLE aliases
+
+alias gb='gradle'
+alias gt='gradle test -i'
+alias gtc='gradle test --continuous'
+alias gp='gradle-profiler'
+
+# PYTHON aliases
+alias python=python3

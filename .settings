@@ -1,0 +1,18 @@
+autoload -U colors
+colors
+setopt AUTO_PUSHD
+setopt PUSHD_MINUS
+setopt CDABLE_VARS
+
+setopt EXTENDED_HISTORY        # store time in history
+setopt HIST_EXPIRE_DUPS_FIRST  # unique events are more usefull to me
+setopt HIST_VERIFY             # Make those history commands nice
+setopt INC_APPEND_HISTORY      # immediatly insert history into history file
+HISTSIZE=160000                # spots for duplicates/uniques
+SAVEHIST=150000                # unique events guaranteed
+HISTFILE=~/.history
+
+# enable vi mode for command line input
+set -o vi
+bindkey -v
+EDITOR=gvim

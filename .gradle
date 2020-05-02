@@ -1,4 +1,3 @@
-PATH="$PATH:/Users/y62wang/workplace/repositories/gradle-profiler/build/install/gradle-profiler/bin"
 # aliases
 
 alias gb='gradle'

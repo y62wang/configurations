@@ -1,0 +1,59 @@
+[diff]
+	tool = colordiff
+[merge]
+	tool = kdiff3
+[difftool]
+	prompt = false
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+	ui = true
+  pager = true
+[core]
+    # pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = /Users/y62wang/.gitignore_global
+[color "diff"]
+	plain = normal
+	meta = bold
+	frag = cyan
+	old = red
+	new = green
+	commit = yellow
+	whitespace = normal red
+[color "branch"]
+	current = green
+	local = normal
+	remote = red
+	plain = normal
+[color "status"]
+	header = normal
+	added = red
+	updated = green
+	changed = red
+	untracked = red
+	nobranch = red
+[color "grep"]
+	match = normal
+[color "interactive"]
+	prompt = normal
+	header = normal
+	help = normal
+	error = normal
+[user]
+	email = y62wang@gmail.com
+	name = Yang Wang
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/y62wang/.stCommitMsg
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

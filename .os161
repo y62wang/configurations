@@ -1,0 +1,37 @@
+export SRC_DIR="/home/trinity/shared/os161/"
+export OS_ROOT="/home/trinity/root/"
+export KVM_NAME="ASST2"
+
+function configure-os-root() {
+	cd $SRC_DIR
+	./configure --ostree=$OS_ROOT
+}
+
+function configure-kvm() {
+	cd $SRC_DIR/kern/conf/
+	./config $KVM_NAME 
+}
+
+function bb() {
+	cd $SRC_DIR/kern/compile/$KVM_NAME
+	bmake depend && bmake && bmake install && cd $OS_ROOT
+}
+
+function b() {
+	cd $SRC_DIR/kern/compile/$KVM_NAME
+	bmake && bmake install && cd $OS_ROOT
+}
+
+function k() {
+	cd $OS_ROOT
+	sys161 kernel $@
+}
+
+function fb() {
+	configure-kvm && bb 
+}
+
+function kt() {
+	cd $SRC_DIR/test161
+	test161 run $@
+}
