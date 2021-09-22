@@ -28,16 +28,15 @@ export BRAZIL_PLATFORM_OVERRIDE="RHEL5_64"
 
 # Remote Machines
 alias ki="kinit -f"
+alias init="kinit -f && mwinit -o"
 alias ssh1="ssh -o ProxyCommand=None $1"
 
-VM2="dev-dsk-yanwany-2a3-i-fbe3f90d.us-west-2.amazon.com"
-VM3="dev-dsk-yanwany-2a-f076c40e.us-west-2.amazon.com"
-alias vm2="ssh $VM2"
-alias vm3="ssh $VM3"
+VM="dev-dsk-yanwany-2c-1576ea1b.us-west-2.amazon.com"
+alias vm2="ssh $VM"
 
 # GIT ALIASES
 alias last-commit="git log --stat --max-count=1 --decorate --graph"
-alias script="sub ~/workplace/scripts/zsh-config.sh"
+alias script="code  ~/workplace/configurations/zsh-config.sh"
 
 
 function w() {
@@ -321,8 +320,6 @@ bdw() {
 bdp() {
     brazil pkg --delete -r "removing package" -p $1
 }
-
-
 
 git-pull-all-pkgs() {
     # store the current dir
