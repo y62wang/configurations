@@ -43,7 +43,7 @@
 	error = normal
 [user]
 	email = y62wang@gmail.com
-	name = Yang Wang
+	name = y62wang
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 

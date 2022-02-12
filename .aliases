@@ -39,3 +39,6 @@ alias gp='gradle-profiler'
 
 # PYTHON aliases
 alias python=python3
+
+# kubernetes
+alias kube="/usr/local/bin/kubectl"

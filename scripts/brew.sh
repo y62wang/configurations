@@ -31,6 +31,7 @@ brew install wget;
 brew install bat bmon htop nmap;
 brew install dark-mode ack midnight-commander htop wget geoip watch awscli calc jq lftp links lynx ncdu nmap tmux tree unrar vimpager;
 brew install cask;
+brew install visual-studio-code;
 
 brew install git-lfs
 brew install gs

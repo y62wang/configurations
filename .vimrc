@@ -1,7 +1,6 @@
 
 " ################################################################################
-" VUNDLE SETTINGS 
-
+" VUNDLE SETTINGS
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -91,11 +90,7 @@ filetype plugin indent on    " required
 
 set directory=$HOME/.vim/swapfiles/
 set rtp+=/usr/local/opt/fzf
-"set guifont=Roboto\ Mono\ for\ Powerline:h14
-set guifont=Menlo:h14
 set guifont=Consolas:h14
-"set guifont=Courier:h14
-"set guifont=Fira\ Mono\ for\ Powerline:h14
 
 set t_Co=256
 set encoding=utf-8
@@ -159,3 +154,4 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 
+colo morning

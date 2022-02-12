@@ -7,3 +7,7 @@
 function ib() {
     python ~/workplace/alpha_stock/tools/ib.py $1 $2
 }
+
+function lc-commit() {
+    git commit -am "problem $1 - java"
+}
