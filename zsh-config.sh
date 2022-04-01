@@ -36,7 +36,7 @@ alias vm2="ssh $VM"
 
 # GIT ALIASES
 alias last-commit="git log --stat --max-count=1 --decorate --graph"
-alias script="code  ~/workplace/configurations/zsh-config.sh"
+alias config="code  ~/workplace/configurations/zsh-config.sh"
 
 
 function w() {
@@ -58,6 +58,7 @@ function envlog() {
 
 ######################################## BRAZIL ########################################
 alias bws="brazil-recursive-cmd --allPackages brazil-build"
+alias bbb="brazil-recursive-cmd --allPackages brazil-build build"
 alias b="brazil-build build"
 alias dry-run="brazil ws dryrun"
 alias bba="brazil-build;artifacts";
@@ -69,8 +70,6 @@ alias syncmd="brazil ws --sync --md"
 alias sync="brazil ws sync"
 alias create-ws="brazil ws --create --name $1"
 alias vs="brazil ws --use --versionset $1"
-
-alias checkout-no-rush-pkgs="checkout NoRushCommon NoRushEligibility NoRushPromotionApplication NoRushIncentiveConfigurationModel"
 
 function checkout() {
     for pkg in $@; do
@@ -105,13 +104,13 @@ function bbx() {
 }
 
 function b() {
-    brazil-build build
+    bb build
 }
 
 function bb()
 {
     if [ "$#"  -eq 1 ]; then
-        brazil-build "$1"
+        brazil-build "$@" | grep -vE 'dependency|farm' --line-buffered --color=always
     else
         bbx
         OUT=$?
@@ -380,7 +379,65 @@ function ee() {
     fi
 }
 
-function repo() {
+function pkg() {
     wd repo
     git clone ssh://git.amazon.com/pkg/$1
 }
+
+function tlog() {
+    gtail --retry -F $1
+}
+
+function tail-query-log() {
+    gtail --retry -F build/private/var/output/logs/query_log.*
+}
+
+function tail-app-log() {
+    gtail --retry -F build/private/var/output/logs/application.log.*
+}
+
+function debug-log() {
+    gtail --retry -F build/private/var/output/logs/application.log.* | grep "yanwany-debug"
+}
+
+function wf() {
+    rde workflow run $@
+}
+
+function t() {
+    wf test
+}
+
+# test-debug
+function td() {
+    wf test 2>&1 | grep yanwany-debug
+}
+
+function qt() {
+    wf quick-test
+}
+
+# quick-test-debug
+function qtd() {
+    wf quick-test 2>&1 | grep yanwany-debug
+}
+
+function rep() {
+sleep_counter=1
+while true
+do
+   if [[ -z "${REP_SLEEP_TIMER}" ]]; then
+     SLEEP_TIMER=1
+     else
+     SLEEP_TIMER="${REP_SLEEP_TIMER}"
+   fi
+   printf '=%.0s' {1..80}
+   echo \\n\[`date`\] \[run $sleep_counter\]" CMD:: "$@
+   eval $@
+   sleep $SLEEP_TIMER
+   let sleep_counter++
+done
+}
+
+### Temporary
+alias bgql="wd r && rm -rf generated-src/; b && wd s && rm -rf build/private/var/output/logs && bb server"
