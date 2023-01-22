@@ -1,5 +1,4 @@
-#!/bin/zsh
-echo "export DOT_FILE_DIR=`pwd`" > .exports_dotfiles_dir
+echo "export DOT_FILE_DIR=$(pwd)" >.exports_dotfiles_dir
 source .exports_dotfiles_dir
 
 ln -s $DOT_FILE_DIR/.exports_dotfiles_dir $HOME
@@ -13,7 +12,6 @@ ln -s $DOT_FILE_DIR/.curlrc $HOME
 ln -s $DOT_FILE_DIR/.gitconfig $HOME
 ln -s $DOT_FILE_DIR/.gitignore_global $HOME
 ln -s $DOT_FILE_DIR/.gdbinit $HOME
-
 
 ln -s $DOT_FILE_DIR/.configurations $HOME
 ln -s $DOT_FILE_DIR/.source $HOME
